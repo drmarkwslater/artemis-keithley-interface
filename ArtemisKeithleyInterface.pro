@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        keithleywindow.cpp
+        keithleywindow.cpp \
+    keithleydevice.cpp
 
-HEADERS  += keithleywindow.h
+HEADERS  += keithleywindow.h \
+    keithleydevice.h
 
 FORMS    += keithleywindow.ui
