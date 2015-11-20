@@ -21,7 +21,6 @@ HEADERS  += keithleywindow.h \
 
 FORMS    += keithleywindow.ui
 
-INCLUDEPATH += "C:\Program Files (x86)\National Instruments\Shared\ExternalCompilerSupport\C\include"
-
-LIBS += -L"C:\Users\bhamadmin\Documents\build-ArtemisKeithleyInterface-Desktop_Qt_5_4_2_MinGW_32bit2-Debug" -lni4882
-
+LIBS += -L$$PWD/. -lni4882
+INCLUDEPATH += $$PWD/.
+DEPENDPATH += $$PWD/.
