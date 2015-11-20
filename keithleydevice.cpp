@@ -1,5 +1,6 @@
-#include "GPIB.h"
+#include "ni4882.h"
 #include <iostream>
+#include <fstream>
 #include <ctime>
 #include <time.h>
 #include <iomanip>
@@ -28,18 +29,18 @@ KeithleyDevice::KeithleyDevice() {
 
 void KeithleyDevice::pulsesweepvoltage(double bottom, double top, int no_of_steps) {
     // Function to sweep voltage with pulses
-    cout << "Activated pulse voltage" << endl;
-    cout << "This function sweeps with a pulsing voltage" << endl;
-    cout << "Lowest voltage " << bottom << " V" << endl;
-    cout << "Highest voltage " << top << " V" << endl;
-    cout << "Number of steps " << no_of_steps << endl;
+    std::cout << "Activated pulse voltage" << std::endl;
+    std::cout << "This function sweeps with a pulsing voltage" << std::endl;
+    std::cout << "Lowest voltage " << bottom << " V" << std::endl;
+    std::cout << "Highest voltage " << top << " V" << std::endl;
+    std::cout << "Number of steps " << no_of_steps << std::endl;
 
     for(int i=0; i<=no_of_steps; i++) {
         // Set up the voltage
         double tempvolt = bottom + (double)i * ( (top - bottom)/((double)no_of_steps) );
 
         char tempbuff[100];
-        cout << "votage to set = " << tempvolt << endl;
+        std::cout << "votage to set = " << tempvolt << std::endl;
         strcpy(stringinput,":SOUR:VOLT:LEV:AMPL ");
         strcat(stringinput,itoa(tempvolt,tempbuff,10));
         printf("command: %s\n",stringinput);
@@ -50,16 +51,19 @@ void KeithleyDevice::pulsesweepvoltage(double bottom, double top, int no_of_step
         ibwrt(Device, stringinput, strlen(stringinput));
         Sleep(10);
 
-        cout << "Pulsed " << tempvolt << " V." << endl;
+        std::cout << "Pulsed " << tempvolt << " V." << std::endl;
     }
 
-    cout << "End of function";
+    std::cout << "End of function";
 
     // Should be pretty useful to exit the function with an error code at some point.
     //return 0;
 }
 
 void KeithleyDevice::current_pulse_sweep(double bottom, double top, int no_of_steps, char * filedir) {
+    // ibcnt not defined - NEEDS CHECKING
+    return;
+
      time_t rawtime;
      struct tm * timeinfo;
 
@@ -70,33 +74,33 @@ void KeithleyDevice::current_pulse_sweep(double bottom, double top, int no_of_st
      char filename[2048];
      strcpy(filename, filedir);
 
-     string eofnamestring;
-     ostringstream eofname;
+     std::string eofnamestring;
+     std::ostringstream eofname;
      eofname << timeinfo->tm_hour << timeinfo->tm_min << timeinfo->tm_sec << ".csv";
      eofnamestring = eofname.str();
      strcat(filename, eofnamestring.c_str());
 
-     ofstream outfile;
+     std::ofstream outfile;
 
-     outfile.open(filename, ios::app);
+     outfile.open(filename, std::ios::app);
 
      if(outfile.is_open()) {
-        cout << "Outputting to file " << filename << endl;
+        std::cout << "Outputting to file " << filename << std::endl;
      }
      else {
-         cout << "Error opening " << filename << ". Will pulse anyway..." << endl;
+         std::cout << "Error opening " << filename << ". Will pulse anyway..." << std::endl;
      }
 
     // Function to sweep current pulses
-    cout << "Activated pulse voltage" << endl;
-    cout << "This function sweeps with a pulsing voltage" << endl;
-    cout << "Lowest voltage" << bottom << " V" << endl;
-    cout << "Highest voltage" << top << " V" << endl;
-    cout << "Number of steps " << no_of_steps << endl;
+    std::cout << "Activated pulse voltage" << std::endl;
+    std::cout << "This function sweeps with a pulsing voltage" << std::endl;
+    std::cout << "Lowest voltage" << bottom << " V" << std::endl;
+    std::cout << "Highest voltage" << top << " V" << std::endl;
+    std::cout << "Number of steps " << no_of_steps << std::endl;
     char Buffer[1000];
     for(int i=0; i<=no_of_steps; i++) {
-        ostringstream tempcurrstream;
-        string tempcurrstring;
+        std::ostringstream tempcurrstream;
+        std::string tempcurrstring;
 
         double tempcurr = bottom + (double)i * ( (top - bottom)/(double)no_of_steps );
         // TODO set up this for loop for our IV curve.
@@ -131,7 +135,7 @@ void KeithleyDevice::current_pulse_sweep(double bottom, double top, int no_of_st
         this->write(":OUTP ON");
         this->write(":READ?");
 
-        this->read(Buffer,1000);
+        int ibcnt = this->read(Buffer,1000);
         Buffer[ibcnt] = '\0'; //end the buffer so we don't pick up faff from Keithley.
 
 
@@ -139,21 +143,25 @@ void KeithleyDevice::current_pulse_sweep(double bottom, double top, int no_of_st
         outfile << Buffer;
         Sleep(10);
         this->write(":OUTP OFF");
-        cout << "Made it do that thing. Yeah. " << endl;
+        std::cout << "Made it do that thing. Yeah. " << std::endl;
 
     }
 
     outfile.close();
     if(outfile.is_open()) {
-        cout << filename << " closed." << endl;
+        std::cout << filename << " closed." << std::endl;
     }
     else {
-        cout << filename << " is still open! Whoops!" << endl;
+        std::cout << filename << " is still open! Whoops!" << std::endl;
     }
 }
 
 
-string KeithleyDevice::forward_voltage_measurement(double i_value) {
+std::string KeithleyDevice::forward_voltage_measurement(double i_value) {
+
+    // ibcnt not defined - NEEDS CHECKING
+    return "";
+
     // This function is designed to take the forward voltage at a value i_value A.
      //time_t rawtime;
      //struct tm * timeinfo;
@@ -185,14 +193,14 @@ string KeithleyDevice::forward_voltage_measurement(double i_value) {
      //}
 
     // Function to sweep current pulses
-    cout << "Activated pulse voltage" << endl;
-    cout << "This function get the forward voltage" << endl;
-    cout << "Target current " << i_value << " A" << endl;
+    std::cout << "Activated pulse voltage" << std::endl;
+    std::cout << "This function get the forward voltage" << std::endl;
+    std::cout << "Target current " << i_value << " A" << std::endl;
 
     char Buffer[1000];
     //for(int i=0; i<=no_of_steps; i++) {
-        ostringstream tempcurrstream;
-        string tempcurrstring;
+        std::ostringstream tempcurrstream;
+        std::string tempcurrstring;
 
         //double tempcurr = bottom + (double)i * ( (top - bottom)/(double)no_of_steps );
         // TODO set up this for loop for our IV curve.
@@ -227,16 +235,16 @@ string KeithleyDevice::forward_voltage_measurement(double i_value) {
         this->write(":OUTP ON");
         this->write(":READ?");
 
-        this->read(Buffer,1000);
+        int ibcnt = this->read(Buffer,1000);
         Buffer[ibcnt] = '\0'; //end the buffer so we don't pick up faff from Keithley.
 
 
         //+	outputfile1 << gtim << "\t" << Buffer;
-        string temp;
+        std::string temp;
         temp = Buffer;
         Sleep(10);
         this->write(":OUTP OFF");
-        cout << "Hopefully measured forward voltage at " << i_value << " A" << endl;
+        std::cout << "Hopefully measured forward voltage at " << i_value << " A" << std::endl;
         return temp;
     //}
 
@@ -257,7 +265,7 @@ void KeithleyDevice::rampvoltagedown(int start, int end) {
     for(int i=start; i>end-1; i=i-1)
     {
         char tempbuff[100];
-        cout << "votage to set = " << i << endl;
+        std::cout << "votage to set = " << i << std::endl;
         strcpy(stringinput,":SOUR:VOLT:LEV:AMPL "); // fill the first bit of the string with input
         strcat(stringinput,itoa(i,tempbuff,10)); // add a bit to the end http://www.cplusplus.com/reference/cstdlib/itoa/
         printf("command: %s\n",stringinput); // print the command sent
@@ -275,7 +283,7 @@ void KeithleyDevice::rampvoltageup(int start, int end)
     for(int i=start; i<end+1; i=i+1)
     {
         char tempbuff[100];
-        cout << "votage to set = " << i << endl;
+        std::cout << "votage to set = " << i << std::endl;
         strcpy(stringinput,":SOUR:VOLT:LEV:AMPL ");
         strcat(stringinput,itoa(i,tempbuff,10));
         printf("command: %s\n",stringinput);
@@ -288,7 +296,7 @@ void KeithleyDevice::rampvoltageup(int start, int end)
 int KeithleyDevice::write(const char * c) {
     strcpy(stringinput,c);
     ibwrt(Device,stringinput,strlen(stringinput));
-    cout << "string " << c << " hopefully written to device!" << endl;
+    std::cout << "string " << c << " hopefully written to device!" << std::endl;
     //Sleep(10);
     return 0;
     //strcpy(stringinput

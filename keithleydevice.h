@@ -1,6 +1,8 @@
 #ifndef KEITHLEYDEVICE_H
 #define KEITHLEYDEVICE_H
 
+#include <string>
+
 #define EARM  22  // The ibnotify Callback failed to rearm
 #define EHDL  23  // The input handle is invalid
 #define EWIP  26  // Wait already in progress on input ud
@@ -14,7 +16,7 @@ public:
     void current_pulse_sweep(double,double,int,char *);
     void rampvoltagedown(int,int);
     void rampvoltageup(int,int);
-    string forward_voltage_measurement(double);
+    std::string forward_voltage_measurement(double);
     int write(const char *);
     int read(void *,int);
     int close_connection();
