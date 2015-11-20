@@ -1,0 +1,7 @@
+# Ignore NI files
+ni4882.def
+ni4882.h
+libni4882.a
+
+# Ignore user Qt file
+*.user
