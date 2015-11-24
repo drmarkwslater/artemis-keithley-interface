@@ -43,6 +43,14 @@ void KeithleyWindow::newBeamOnFile()
  */
 void KeithleyWindow::beamOffMeasurement()
 {
+    if (beamOffFilename_ == "")
+    {
+        QMessageBox msg;
+        msg.setText("No BEAM OFF File selected");
+        msg.exec();
+        return;
+    }
+
     genericBeamMeasurement( beamOffFilename_ );
 }
 
@@ -51,6 +59,14 @@ void KeithleyWindow::beamOffMeasurement()
  */
 void KeithleyWindow::beamOnMeasurement()
 {
+    if (beamOnFilename_ == "")
+    {
+        QMessageBox msg;
+        msg.setText("No BEAM ON File selected");
+        msg.exec();
+        return;
+    }
+
     genericBeamMeasurement( beamOnFilename_ );
 }
 
@@ -65,6 +81,7 @@ void KeithleyWindow::genericBeamMeasurement( const QString &fname )
     {
         QMessageBox msg;
         msg.setText("Could not open beam file");
+        msg.exec();
         return;
     }
 
@@ -87,12 +104,22 @@ void KeithleyWindow::genericBeamMeasurement( const QString &fname )
  */
 void KeithleyWindow::ivCurveMeasurement()
 {
+    // valid filename selected?
+    if (beamOffFilename_ == "")
+    {
+        QMessageBox msg;
+        msg.setText("No BEAM OFF File selected for IV Curve recording");
+        msg.exec();
+        return;
+    }
+
     // Open the file
     QFile outf{beamOffFilename_ + QString{ui->spnDatumNum_->value()} };
     if (!outf.open(QIODevice::Append))
     {
         QMessageBox msg;
         msg.setText("Could not open iv curve file");
+        msg.exec();
         return;
     }
 
