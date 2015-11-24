@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <memory>
+#include <QString>
+
 #include "keithleydevice.h"
 
 namespace Ui {
@@ -36,6 +38,9 @@ private slots:
 
     //! select a new beam on file
     void newBeamOnFile();
+
+    //! Record timestamp, Fluence and voltage measurement
+    void beamOffMeasurement();
 
 };
 
