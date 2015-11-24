@@ -21,6 +21,6 @@ HEADERS  += keithleywindow.h \
 
 FORMS    += keithleywindow.ui
 
-LIBS += -L$$PWD/. -lni4882
+LIBS += $$PWD/gpib-32.obj
 INCLUDEPATH += $$PWD/.
 DEPENDPATH += $$PWD/.
