@@ -31,7 +31,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox">
+       <widget class="QDoubleSpinBox" name="spnFluence_">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -63,7 +63,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinBox_2">
+       <widget class="QSpinBox" name="spnFluenceExp_">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -146,7 +146,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spinBox">
+         <widget class="QSpinBox" name="spnDatumNum_">
           <property name="maximum">
            <number>1000</number>
           </property>
@@ -344,10 +344,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>KeithleyWindow</receiver>
+   <slot>ivCurveMeasurement()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>233</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>214</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>KeithleyWindow</receiver>
+   <slot>beamOnMeasurement()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>298</x>
+     <y>134</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>304</x>
+     <y>161</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>newBeamOffFile()</slot>
   <slot>newBeamOnFile()</slot>
   <slot>beamOffMeasurement()</slot>
+  <slot>ivCurveMeasurement()</slot>
+  <slot>beamOnMeasurement()</slot>
  </slots>
 </ui>

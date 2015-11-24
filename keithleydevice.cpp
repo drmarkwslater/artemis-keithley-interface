@@ -302,7 +302,7 @@ int KeithleyDevice::write(const char * c) {
     //strcpy(stringinput
 }
 
-int KeithleyDevice::read(void * c, int i) {
+int KeithleyDevice::read(void * c, int i) const {
     // This function reads i no of bytes from the device.
     // void in this case can easily be a char[]
     // (at least this is how it was used in the previous version of this program.)
@@ -311,7 +311,7 @@ int KeithleyDevice::read(void * c, int i) {
     return 0; // One day this will look for errors.
 }
 
-int KeithleyDevice::close_connection() {
+int KeithleyDevice::close_connection() const {
     // from NI:
     // Note: The ibonl command is used to close down the unit descriptors after
     // you are done using them. You should call ibonl at the end of your
@@ -325,16 +325,16 @@ int KeithleyDevice::close_connection() {
     return 0; // would be good to return errors from here sometime.
 }
 
-int KeithleyDevice::clear() {
+int KeithleyDevice::clear() const {
     ibclr(Device);
 
     return 0; // TODO error checking
 }
 
-void KeithleyDevice::cls() {
+void KeithleyDevice::cls() const {
     ibwrt(Device, "*CLS", 5);
 }
 
-void KeithleyDevice::rst() {
+void KeithleyDevice::rst() const {
     ibwrt(Device, "*RST",5);
 }

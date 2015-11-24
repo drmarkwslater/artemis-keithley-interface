@@ -18,11 +18,11 @@ public:
     void rampvoltageup(int,int);
     std::string forward_voltage_measurement(double);
     int write(const char *);
-    int read(void *,int);
-    int close_connection();
-    int clear();
-    void cls();
-    void rst();
+    int read(void *,int) const;
+    int close_connection() const;
+    int clear() const;
+    void cls() const;
+    void rst() const;
     KeithleyDevice();
 private:
 
