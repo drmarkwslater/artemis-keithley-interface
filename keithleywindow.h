@@ -2,6 +2,8 @@
 #define KEITHLEYWINDOW_H
 
 #include <QMainWindow>
+#include <memory>
+#include "keithleydevice.h"
 
 namespace Ui {
 class KeithleyWindow;
@@ -16,7 +18,18 @@ public:
     ~KeithleyWindow();
 
 private:
+    //! Pointer to UI
     Ui::KeithleyWindow *ui;
+
+    //! Keithley Device object
+    KeithleyDevice kdev_;
+
+    //! Beam Off filename
+    QString beamOffFilename_;
+
+private slots:
+    //! select a new beam off file
+    void newBeamOffFile();
 };
 
 #endif // KEITHLEYWINDOW_H

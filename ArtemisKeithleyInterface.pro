@@ -24,3 +24,5 @@ FORMS    += keithleywindow.ui
 LIBS += $$PWD/gpib-32.obj
 INCLUDEPATH += $$PWD/.
 DEPENDPATH += $$PWD/.
+
+CONFIG += c++11
