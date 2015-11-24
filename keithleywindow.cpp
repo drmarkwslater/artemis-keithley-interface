@@ -23,3 +23,12 @@ void KeithleyWindow::newBeamOffFile()
     beamOffFilename_ = QFileDialog::getSaveFileName(this, "Please choose a BEAM OFF file name");
     ui->lblCurrentBeamOffFile_->setText( beamOffFilename_ );
 }
+
+/*!
+ * Select the beam on file
+ */
+void KeithleyWindow::newBeamOnFile()
+{
+    beamOnFilename_ = QFileDialog::getSaveFileName(this, "Please choose a BEAM ON file name");
+    ui->lblCurrentBeamOnFile_->setText( beamOnFilename_ );
+}

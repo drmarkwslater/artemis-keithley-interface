@@ -296,8 +296,41 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionNew_Beam_On</sender>
+   <signal>triggered()</signal>
+   <receiver>KeithleyWindow</receiver>
+   <slot>newBeamOnFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionQuit</sender>
+   <signal>triggered()</signal>
+   <receiver>KeithleyWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>newBeamOffFile()</slot>
+  <slot>newBeamOnFile()</slot>
  </slots>
 </ui>

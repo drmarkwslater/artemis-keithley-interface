@@ -27,9 +27,16 @@ private:
     //! Beam Off filename
     QString beamOffFilename_;
 
+    //! Beam On filename
+    QString beamOnFilename_;
+
 private slots:
     //! select a new beam off file
     void newBeamOffFile();
+
+    //! select a new beam on file
+    void newBeamOnFile();
+
 };
 
 #endif // KEITHLEYWINDOW_H
